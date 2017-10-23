@@ -11,11 +11,40 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('AppBundle:Project:index.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/list", name="list")
+     */
+    public function listAction()
+    {
+        return $this->render('AppBundle:Project:list.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function loginAction()
+    {
+        return $this->render('AppBundle:Project:login.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction()
+    {
+        return $this->render('AppBundle:Project:register.html.twig', array(
+            // ...
+        ));
     }
 }

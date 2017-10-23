@@ -7,6 +7,11 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <a href="{{ path('homepage') }}">Strona główna</a>
+        <a href="{{ path('list') }}">Książki</a>
+        <a href="{{ path('login') }}">Logowanie</a>
+        <a href="{{ path('register') }}">Rejestracja</a>
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
