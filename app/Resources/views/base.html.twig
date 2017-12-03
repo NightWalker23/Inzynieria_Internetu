@@ -34,6 +34,21 @@
                        onmouseout="this.style.color='black';">Książki</a>
                 </div>
 
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="opcjeSidebar">
+                        <a href="{{ path('adminpanel') }}" style="color: black;" onmouseover="this.style.color='crimson'"
+                           onmouseout="this.style.color='black';">Panel administratora</a>
+                    </div>
+                {% else %}
+                    <div class="opcjeSidebar">
+                        <a href="{{ path('userpanel') }}" style="color: black;" onmouseover="this.style.color='crimson'"
+                           onmouseout="this.style.color='black';">Panel użytkownika</a>
+                    </div>
+                {% endif %}
+
+                {#{{ 'layout.logged_in_as' | trans({'%username%': app.user.username}, 'FOSUserBundle') }}#}
+
                 <div class="opcjeSidebar">
                     <a href="{{ path('fos_user_security_logout') }}" style="color: black;"
                        onmouseover="this.style.color='crimson'"
@@ -42,18 +57,16 @@
                 </div>
 
             {% else %}
-                <div id="script">
-                    <div class="opcjeSidebar">
-                        <a href="{{ path('fos_user_security_login') }}" style="color: black;"
-                           onmouseover="this.style.color='crimson'"
-                           onmouseout="this.style.color='black';">{{ 'Zaloguj'|trans({}, 'FOSUserBundle') }}</a>
-                    </div>
+                <div class="opcjeSidebar">
+                    <a href="{{ path('fos_user_security_login') }}" style="color: black;"
+                       onmouseover="this.style.color='crimson'"
+                       onmouseout="this.style.color='black';">{{ 'Zaloguj'|trans({}, 'FOSUserBundle') }}</a>
+                </div>
 
-                    <div class="opcjeSidebar">
-                        <a href="{{ path('fos_user_registration_register') }}" style="color: black;"
-                           onmouseover="this.style.color='crimson'"
-                           onmouseout="this.style.color='black';">{{ 'Rejestracja'|trans({}, 'FOSUserBundle') }}</a>
-                    </div>
+                <div class="opcjeSidebar">
+                    <a href="{{ path('fos_user_registration_register') }}" style="color: black;"
+                       onmouseover="this.style.color='crimson'"
+                       onmouseout="this.style.color='black';">{{ 'Rejestracja'|trans({}, 'FOSUserBundle') }}</a>
                 </div>
             {% endif %}
         </div>
@@ -61,6 +74,7 @@
         {#CONTENT#}
         {% block content %}
         <div id="content">
+
             {#TUTAJ TREŚC#}
             {% block fos_user_content %}{% endblock fos_user_content %}
 

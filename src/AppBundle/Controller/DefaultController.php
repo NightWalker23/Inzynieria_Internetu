@@ -28,4 +28,24 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/userpanel", name="userpanel")
+     */
+    public function userpanelAction()
+    {
+        return $this->render('AppBundle:Project:userpanel.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/adminpanel", name="adminpanel")
+     */
+    public function adminpanelAction()
+    {
+        return $this->render('AppBundle:Project:adminpanel.html.twig', array(
+            // ...
+        ));
+    }
+
 }

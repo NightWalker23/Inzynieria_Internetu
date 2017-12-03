@@ -171,4 +171,11 @@ class User extends BaseUser
     {
         return $this->firstName . " " . $this->lastName;
     }
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->roles = array('ROLE_USER');
+    }
 }
