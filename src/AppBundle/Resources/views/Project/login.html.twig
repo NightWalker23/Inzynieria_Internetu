@@ -1,7 +1,10 @@
-{% extends "::base.html.twig" %}
+{#{% extends "::base.html.twig" %}#}
+{% include '::base.html.twig' %}
 
-{% block title %}AppBundle:Project:login{% endblock %}
+{% block title %}Logowanie{% endblock %}
 
 {% block body %}
-<h1>Logowanie</h1>
+    <h1>Logowanie</h1>
 {% endblock %}
+
+{% include '::footer.html.twig' %}

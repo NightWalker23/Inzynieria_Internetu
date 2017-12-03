@@ -28,23 +28,4 @@ class DefaultController extends Controller
         ));
     }
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function loginAction()
-    {
-        return $this->render('AppBundle:Project:login.html.twig', array(
-            // ...
-        ));
-    }
-
-    /**
-     * @Route("/register", name="register")
-     */
-    public function registerAction()
-    {
-        return $this->render('AppBundle:Project:register.html.twig', array(
-            // ...
-        ));
-    }
 }

@@ -1,18 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:a="http://www.w3.org/1999/html">
+
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        <a href="{{ path('homepage') }}">Strona główna</a>
-        <a href="{{ path('list') }}">Książki</a>
-        <a href="{{ path('login') }}">Logowanie</a>
-        <a href="{{ path('register') }}">Rejestracja</a>
+        <link rel="Stylesheet" href="/style.css" type="text/css">
 
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/script.js"></script>
+    </head>
+
+    <body>
+    <div id="container">
+        {#OBRAZEK#}
+        <div id="topbar">
+            <div id="topbarL">
+                <img src="/images/library.jpg" width="1000" height="300">
+            </div>
+        </div>
+
+        {#MENU#}
+        <div id="sidebar">
+            <div class="opcjeSidebar">
+                <a  href="{{ path('homepage') }}" style="color: black;" onmouseover="this.style.color='crimson'"
+                   onmouseout="this.style.color='black';" >Strona główna</a>
+            </div>
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="opcjeSidebar">
+                    <a href="{{ path('list') }}" style="color: black;" onmouseover="this.style.color='crimson'"
+                       onmouseout="this.style.color='black';">Książki</a>
+                </div>
+
+                <div class="opcjeSidebar">
+                    <a href="{{ path('fos_user_security_logout') }}" style="color: black;"
+                       onmouseover="this.style.color='crimson'"
+                       onmouseout="this.style.color='black';">
+                        {{ 'Wyloguj'|trans({}, 'FOSUserBundle') }}</a>
+                </div>
+
+            {% else %}
+                <div id="script">
+                    <div class="opcjeSidebar">
+                        <a href="{{ path('fos_user_security_login') }}" style="color: black;"
+                           onmouseover="this.style.color='crimson'"
+                           onmouseout="this.style.color='black';">{{ 'Zaloguj'|trans({}, 'FOSUserBundle') }}</a>
+                    </div>
+
+                    <div class="opcjeSidebar">
+                        <a href="{{ path('fos_user_registration_register') }}" style="color: black;"
+                           onmouseover="this.style.color='crimson'"
+                           onmouseout="this.style.color='black';">{{ 'Rejestracja'|trans({}, 'FOSUserBundle') }}</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        {#CONTENT#}
+        {% block content %}
+        <div id="content">
+            {#TUTAJ TREŚC#}
+            {% block fos_user_content %}{% endblock fos_user_content %}
+
+        </div>
+        {% endblock %}
+
+
+
+        <div style="clear:both;"></div>
+
+    </div>
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
