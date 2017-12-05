@@ -1,91 +1,90 @@
 <!DOCTYPE html>
-<html xmlns:a="http://www.w3.org/1999/html">
+<html>
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="Stylesheet" href="/style.css" type="text/css">
-
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="/script.js"></script>
-    </head>
-
-    <body>
-    <div id="container">
-        {#OBRAZEK#}
-        <div id="topbar">
-            <div id="topbarL">
-                <img src="/images/library.jpg" width="1000" height="300">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    {#<link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>#}
+    <link rel="stylesheet" href="{{ asset('public/node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+<body>
+<div class="py-5 text-center opaque-overlay" style="background-image: url({{ asset('images/library.jpg') }});">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12 text-white">
+                <h1 class="display-3 mb-4">Biblioteka Online</h1>
+                <p class="lead mb-5">Non scholae sed vitae discimus</p>
             </div>
         </div>
-
-        {#MENU#}
-        <div id="sidebar">
-            <div class="opcjeSidebar">
-                <a  href="{{ path('homepage') }}" style="color: black;" onmouseover="this.style.color='crimson'"
-                   onmouseout="this.style.color='black';" >Strona główna</a>
-            </div>
-
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <div class="opcjeSidebar">
-                    <a href="{{ path('list') }}" style="color: black;" onmouseover="this.style.color='crimson'"
-                       onmouseout="this.style.color='black';">Książki</a>
-                </div>
-
-
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div class="opcjeSidebar">
-                        <a href="{{ path('adminpanel') }}" style="color: black;" onmouseover="this.style.color='crimson'"
-                           onmouseout="this.style.color='black';">Panel administratora</a>
-                    </div>
-                {% else %}
-                    <div class="opcjeSidebar">
-                        <a href="{{ path('userpanel') }}" style="color: black;" onmouseover="this.style.color='crimson'"
-                           onmouseout="this.style.color='black';">Panel użytkownika</a>
-                    </div>
-                {% endif %}
-
-                {#{{ 'layout.logged_in_as' | trans({'%username%': app.user.username}, 'FOSUserBundle') }}#}
-
-                <div class="opcjeSidebar">
-                    <a href="{{ path('fos_user_security_logout') }}" style="color: black;"
-                       onmouseover="this.style.color='crimson'"
-                       onmouseout="this.style.color='black';">
-                        {{ 'Wyloguj'|trans({}, 'FOSUserBundle') }}</a>
-                </div>
-
-            {% else %}
-                <div class="opcjeSidebar">
-                    <a href="{{ path('fos_user_security_login') }}" style="color: black;"
-                       onmouseover="this.style.color='crimson'"
-                       onmouseout="this.style.color='black';">{{ 'Zaloguj'|trans({}, 'FOSUserBundle') }}</a>
-                </div>
-
-                <div class="opcjeSidebar">
-                    <a href="{{ path('fos_user_registration_register') }}" style="color: black;"
-                       onmouseover="this.style.color='crimson'"
-                       onmouseout="this.style.color='black';">{{ 'Rejestracja'|trans({}, 'FOSUserBundle') }}</a>
-                </div>
-            {% endif %}
-        </div>
-
-        {#CONTENT#}
-        {% block content %}
-        <div id="content">
-
-            {#TUTAJ TREŚC#}
-            {% block fos_user_content %}{% endblock fos_user_content %}
-
-        </div>
-        {% endblock %}
-
-        <div style="clear:both;"></div>
-
     </div>
+</div>
+<div class="py-5">
+    <div class="m-0 container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="{{ path('homepage') }}" class="active nav-link"><i class="fa fa-home fa-home"></i>&nbsp;Strona główna</a>
+                    </li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('list') }}">Książki</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('adminpanel') }}">Panel administratora</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('userpanel') }}">Panel użytkownika</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{ 'Wyloguj'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login') }}">{{ 'Zaloguj'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
 
-    {#{% block body %}{% endblock %}#}
-    {% block javascripts %}{% endblock %}
-    </body>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{ 'Rejestracja'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-10">
+                {% block content %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class=""></h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-justify">
+                        <p class=""></p>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-xl-5"></div>
+<div class="py-1 bg-dark text-white" style=" position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-3 text-center">
+                <p>© Copyright 2017 Tomasz Tomala - All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+
 </html>
+

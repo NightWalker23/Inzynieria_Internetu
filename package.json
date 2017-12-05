@@ -1,0 +1,25 @@
+{
+  "name": "biblioteka",
+  "version": "1.0.0",
+  "description": "biblioteka ==========",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NightWalker23/Inzynieria_Internetu.git"
+  },
+  "author": "Tomasz Tomala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NightWalker23/Inzynieria_Internetu/issues"
+  },
+  "homepage": "https://github.com/NightWalker23/Inzynieria_Internetu#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2"
+  }
+}
