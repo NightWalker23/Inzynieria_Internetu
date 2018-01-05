@@ -1,31 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Books list</h1>
+{% block content %}
+    <h1>Lista książek</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Amount</th>
+                <th>Tytuł</th>
+                {#<th>Amount</th>#}
+                <th>Autor</th>
+                <th>Kategoria</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for book in books %}
             <tr>
-                <td><a href="{{ path('book_show', { 'id': book.id }) }}">{{ book.id }}</a></td>
+                {#<td><a href="{{ path('book_show', { 'id': book.id }) }}">{{ book.id }}</a></td>#}
+                <td>{{ book.id }}</td>
                 <td>{{ book.title }}</td>
-                <td>{{ book.amount }}</td>
+                {#<td>{{ book.amount }}</td>#}
+                <td>{{ book.author.getFirstName() }} {{ book.author.getLastName() }}</td>
+                <td>{{ book.category.getName() }}</td>
                 <td>
                     <ul>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li>
-                            <a href="{{ path('book_show', { 'id': book.id }) }}">show</a>
+                            <a href="{{ path('book_show', { 'id': book.id }) }}">Pokaż</a>
                         </li>
                         <li>
-                            <a href="{{ path('book_edit', { 'id': book.id }) }}">edit</a>
+                        <a href="{{ path('book_edit', { 'id': book.id }) }}">Edytuj</a>
                         </li>
+                        {% else %}
+                        <li>
+                        <a href="{{ path('book_edit', { 'id': book.id }) }}">Wypożycz</a>
+                        </li>
+                        {%  endif %}
                     </ul>
                 </td>
             </tr>
@@ -33,9 +44,11 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_ADMIN') %}
     <ul>
         <li>
-            <a href="{{ path('book_new') }}">Create a new book</a>
+            <a href="{{ path('book_new') }}">Dodaj książkę</a>
         </li>
     </ul>
+    {%  endif %}
 {% endblock %}

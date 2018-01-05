@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Rental</h1>
+{% block content %}
+    <h1>Wypożyczenie</h1>
 
     <table>
         <tbody>
@@ -10,7 +10,7 @@
                 <td>{{ rental.id }}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th>data</th>
                 <td>{% if rental.date %}{{ rental.date|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
@@ -18,14 +18,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('rental_index') }}">Back to the list</a>
+            <a href="{{ path('rental_index') }}">Powróć do listy</a>
         </li>
         <li>
-            <a href="{{ path('rental_edit', { 'id': rental.id }) }}">Edit</a>
+            <a href="{{ path('rental_edit', { 'id': rental.id }) }}">Edytuj</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Usuń">
             {{ form_end(delete_form) }}
         </li>
     </ul>

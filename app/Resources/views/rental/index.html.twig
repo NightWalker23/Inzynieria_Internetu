@@ -1,28 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Rentals list</h1>
+{% block content %}
+    <h1>Lista wypożyczeń</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Użytkownik</th>
+                <th>Książka</th>
+                <th>Data</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
         {% for rental in rentals %}
             <tr>
                 <td><a href="{{ path('rental_show', { 'id': rental.id }) }}">{{ rental.id }}</a></td>
+                <td>{{ rental.user.getFirstName() }} {{ rental.user.getLastName() }}</td>
+                <td>{{ rental.book.getTitle() }}</td>
                 <td>{% if rental.date %}{{ rental.date|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('rental_show', { 'id': rental.id }) }}">show</a>
+                            <a href="{{ path('rental_show', { 'id': rental.id }) }}">Pokaż</a>
                         </li>
                         <li>
-                            <a href="{{ path('rental_edit', { 'id': rental.id }) }}">edit</a>
+                            <a href="{{ path('rental_edit', { 'id': rental.id }) }}">Edytuj</a>
                         </li>
                     </ul>
                 </td>
@@ -33,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('rental_new') }}">Create a new rental</a>
+            <a href="{{ path('rental_new') }}">Dodaj nowe wypożyczenie</a>
         </li>
     </ul>
 {% endblock %}

@@ -5,6 +5,52 @@
     <div id="content">
         {#TUTAJ TREŚC#}
         <h1>Panel administratora</h1>
+
+        <br>
+        <h4>Zarządzanie autorami</h4>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="card-link" href="{{ path('author_new') }}">Nowy autor</a><br>
+                <a class="card-link" href="{{ path('author_index') }}">Wyświetl autorów</a>
+            </li>
+        </ul>
+
+        <br>
+        <h4>Zarządzanie kategoriami</h4>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="card-link" href="{{ path('category_new') }}">Nowa kategoria</a><br>
+                <a class="card-link" href="{{ path('category_index') }}">Wyświetl kategorie</a>
+            </li>
+        </ul>
+
+        <br>
+        <h4>Zarządzanie wydawnictwami</h4>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="card-link" href="{{ path('publisher_new') }}">Nowe wydawnictwo</a><br>
+                <a class="card-link" href="{{ path('publisher_index') }}">Wyświetl wydawnictwa</a>
+            </li>
+        </ul>
+
+        <br>
+        <h4>Zarządzanie książkami</h4>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="card-link" href="{{ path('book_new') }}">Nowa książka</a><br>
+                <a class="card-link" href="{{ path('book_index') }}">Wyświetl książki</a>
+            </li>
+        </ul>
+
+        <br>
+        <h4>Zarządzanie wypożyczeniami</h4>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="card-link" href="{{ path('rental_new') }}">Nowe wypożyczenie</a><br>
+                <a class="card-link" href="{{ path('rental_index') }}">Wyświetl wypożyczenia</a>
+            </li>
+        </ul>
+
     </div>
 {% endblock %}
 

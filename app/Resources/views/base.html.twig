@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
     {#<link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>#}
     <link rel="stylesheet" href="{{ asset('public/node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Witamy!{% endblock %}</title>
 <body>
 <div class="py-5 text-center opaque-overlay" style="background-image: url({{ asset('images/library.jpg') }});">
     <div class="container py-5">
@@ -28,9 +28,12 @@
                         <a href="{{ path('homepage') }}" class="active nav-link"><i class="fa fa-home fa-home"></i>&nbsp;Strona główna</a>
                     </li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('list') }}">Książki</a>
+                            <a class="nav-link" href="{{ path('book_index') }}">Książki</a>
                         </li>
+                        {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('adminpanel') }}">Panel administratora</a>
@@ -72,7 +75,8 @@
     </div>
 </div>
 <div class="py-xl-5"></div>
-<div class="py-1 bg-dark text-white" style=" position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem;">
+{#<div class="py-1 bg-dark text-white" style=" position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem;">#}
+<div class="py-1 bg-dark text-white">
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-3 text-center">

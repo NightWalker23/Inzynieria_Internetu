@@ -18,15 +18,15 @@ class DefaultController extends Controller
         ));
     }
 
-    /**
-     * @Route("/list", name="list")
-     */
-    public function listAction()
-    {
-        return $this->render('AppBundle:Project:list.html.twig', array(
-            // ...
-        ));
-    }
+//    /**
+//     * @Route("/list", name="list")
+//     */
+//    public function listAction()
+//    {
+//        return $this->render('AppBundle:Project:list.html.twig', array(
+//            // ...
+//        ));
+//    }
 
     /**
      * @Route("/userpanel", name="userpanel")

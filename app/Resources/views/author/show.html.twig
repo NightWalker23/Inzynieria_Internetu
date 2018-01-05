@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Author</h1>
+{% block content %}
+    <h1>Autor</h1>
 
     <table>
         <tbody>
@@ -10,11 +10,11 @@
                 <td>{{ author.id }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Imię</th>
                 <td>{{ author.firstName }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nazwisko</th>
                 <td>{{ author.lastName }}</td>
             </tr>
         </tbody>
@@ -22,14 +22,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('author_index') }}">Back to the list</a>
+            <a href="{{ path('author_index') }}">Powróć do listy</a>
         </li>
         <li>
-            <a href="{{ path('author_edit', { 'id': author.id }) }}">Edit</a>
+            <a href="{{ path('author_edit', { 'id': author.id }) }}">Edytuj</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Usuń">
             {{ form_end(delete_form) }}
         </li>
     </ul>

@@ -98,6 +98,8 @@ class BookController extends Controller
         ));
     }
 
+
+
     /**
      * Deletes a book entity.
      *

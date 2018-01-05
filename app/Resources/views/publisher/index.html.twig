@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Publishers list</h1>
+{% block content %}
+    <h1>Lista wydawnictw</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Nazwa</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
@@ -19,10 +19,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('publisher_show', { 'id': publisher.id }) }}">show</a>
+                            <a href="{{ path('publisher_show', { 'id': publisher.id }) }}">Pokaż</a>
                         </li>
                         <li>
-                            <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}">edit</a>
+                            <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}">Edycja</a>
                         </li>
                     </ul>
                 </td>
@@ -33,7 +33,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('publisher_new') }}">Create a new publisher</a>
+            <a href="{{ path('publisher_new') }}">Dodaj nowe wydawnictwo</a>
         </li>
     </ul>
 {% endblock %}

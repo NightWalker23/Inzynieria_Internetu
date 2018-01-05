@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Category</h1>
+{% block content %}
+    <h1>Kategoria</h1>
 
     <table>
         <tbody>
@@ -18,14 +18,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
+            <a href="{{ path('category_index') }}">Powróć do listy</a>
         </li>
         <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
+            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edytuj</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Usuń">
             {{ form_end(delete_form) }}
         </li>
     </ul>
