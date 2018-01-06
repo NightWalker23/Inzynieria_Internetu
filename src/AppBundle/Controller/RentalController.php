@@ -57,6 +57,7 @@ class RentalController extends Controller
         ));
     }
 
+
     /**
      * Finds and displays a rental entity.
      *

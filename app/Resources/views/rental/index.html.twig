@@ -6,38 +6,53 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Użytkownik</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Id</th>
+                    <th>Użytkownik</th>
+                {% endif %}
                 <th>Książka</th>
                 <th>Data</th>
-                <th>Akcje</th>
+                {% if is_granted('ROLE_ADMIN') %}<th>Akcje</th>{% endif %}
             </tr>
         </thead>
         <tbody>
-        {% for rental in rentals %}
-            <tr>
-                <td><a href="{{ path('rental_show', { 'id': rental.id }) }}">{{ rental.id }}</a></td>
-                <td>{{ rental.user.getFirstName() }} {{ rental.user.getLastName() }}</td>
-                <td>{{ rental.book.getTitle() }}</td>
-                <td>{% if rental.date %}{{ rental.date|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('rental_show', { 'id': rental.id }) }}">Pokaż</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('rental_edit', { 'id': rental.id }) }}">Edytuj</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+        {% if is_granted('ROLE_ADMIN') %}
+            {% for rental in rentals %}
+                <tr>
+                    <td><a href="{{ path('rental_show', { 'id': rental.id }) }}">{{ rental.id }}</a></td>
+                    <td>{{ rental.user.getFirstName() }} {{ rental.user.getLastName() }}</td>
+                    <td>{{ rental.book.getTitle() }}</td>
+                    <td>{% if rental.date %}{{ rental.date|date('Y-m-d') }}{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('rental_show', { 'id': rental.id }) }}">Pokaż</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('rental_edit', { 'id': rental.id }) }}">Edytuj</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {%  else %}
+            {% for rental in rentals %}
+                {% if app.user.getid() == rental.user.getid() %}
+                    <tr>
+                        <td>{{ rental.book.getTitle() }}</td>
+                        <td>{% if rental.date %}{{ rental.date|date('Y-m-d') }}{% endif %}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('rental_new') }}">Dodaj nowe wypożyczenie</a>
-        </li>
-    </ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+            <li>
+                <a href="{{ path('rental_new') }}">Dodaj nowe wypożyczenie</a>
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}
