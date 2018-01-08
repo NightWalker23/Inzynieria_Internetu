@@ -33,9 +33,11 @@
                         <a href="{{ path('book_edit', { 'id': book.id }) }}">Edytuj</a>
                         </li>
                         {% else %}
-                        <li>
-                        <a href="{{ path('rental_index') }}">Wypożycz</a>
-                        </li>
+                            <li>
+                                <a href="{{ path('book_show', { 'id': book.id }) }}">Pokaż</a>
+                            </li>
+
+
                         {%  endif %}
                     </ul>
                 </td>

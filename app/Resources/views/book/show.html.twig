@@ -10,13 +10,17 @@
                 <td>{{ book.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Tytuł</th>
                 <td>{{ book.title }}</td>
             </tr>
             <tr>
-                <th>Amount</th>
-                <td>{{ book.amount }}</td>
+                <th>Autor</th>
+                <td>{{ book.author.getFirstname() }} {{ book.author.getLastname() }}</td>
             </tr>
+            {#<tr>#}
+                {#<th>Amount</th>#}
+                {#<td>{{ book.amount }}</td>#}
+            {#</tr>#}
         </tbody>
     </table>
 
@@ -24,13 +28,19 @@
         <li>
             <a href="{{ path('book_index') }}">Powróć do listy</a>
         </li>
+        {% if is_granted('ROLE_ADMIN') %}
         <li>
             <a href="{{ path('book_edit', { 'id': book.id }) }}">Edytuj</a>
         </li>
+
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Usuń">
+                <input class="btn btn-primary" type="submit" value="Usuń">
             {{ form_end(delete_form) }}
         </li>
+        {% else %}
+        <a class="btn btn-primary" href="{{ path('rent', { 'id': book.id }) }}" >Wypożycz</a>
+        {% endif %}
+
     </ul>
 {% endblock %}

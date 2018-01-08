@@ -18,7 +18,7 @@ class RentalController extends Controller
      * Lists all rental entities.
      *
      * @Route("/", name="rental_index")
-     * @Method("GET")
+     * @Method({"GET" , "POST"})
      */
     public function indexAction()
     {
@@ -117,6 +117,29 @@ class RentalController extends Controller
         }
 
         return $this->redirectToRoute('rental_index');
+    }
+
+    /**
+     * @Route("/wypozyczone/{id}", name="wypozyczone")
+     */
+    public function userRentalAction(Request $request){
+
+        $rental = new Rental();
+        $form = $this->createForm('AppBundle\Form\RentalType', $rental);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($rental);
+            $em->flush();
+
+            return $this->redirectToRoute('rental_show', array('id' => $rental->getId()));
+        }
+
+        return $this->render('rental/new.html.twig', array(
+            'rental' => $rental,
+            'form' => $form->createView(),
+        ));
     }
 
     /**

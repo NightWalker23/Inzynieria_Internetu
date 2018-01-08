@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Book;
+use AppBundle\Entity\Rental;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Book controller.
@@ -18,9 +20,9 @@ class BookController extends Controller
      * Lists all book entities.
      *
      * @Route("/", name="book_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -61,16 +63,50 @@ class BookController extends Controller
      * Finds and displays a book entity.
      *
      * @Route("/{id}", name="book_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Book $book)
+    public function showAction(Request $request, Book $book)
     {
         $deleteForm = $this->createDeleteForm($book);
+
+//        $rental = new Rental();
+//        $form = $this -> createForm('AppBundle\Form\RentalType', $rental);
+//        $form ->handleRequest($request);
+//
+//        if($form->isSubmitted() && $form->isValid()){
+//            $em = $this -> getDoctrine()->getManager();
+//            $em -> persist($rental);
+//            $em -> flush();
+//
+  //          return $this->redirectToRoute('book_index');
+    //    }
 
         return $this->render('book/show.html.twig', array(
             'book' => $book,
             'delete_form' => $deleteForm->createView(),
-        ));
+               ));
+    }
+
+    /**
+     * @Route("/rent/{id}", name="rent")
+     * @Method({"GET", "POST"})
+     */
+    public function rentThisBook(Book $book){
+
+            $rental = new Rental();
+            $rental->setBook($book);
+            $rental->setUser($this->getUser());
+            $date = new \DateTime('now');
+
+            $rental->setDate($date);
+
+
+            $em = $this -> getDoctrine()->getManager();
+            $em -> persist($rental);
+            $em -> flush();
+
+            return $this->redirectToRoute('rental_index');
+
     }
 
     /**
